@@ -5,11 +5,9 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <title>Manybots Gmail Github Visualization</title>
 
-<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://www.manybots.com/stylesheets/manybots.css" type="text/css" media="screen">
-
  <style type='text/css'>
     /* style up the tooltips content */
+    p{margin:0;}
 .charlab { font-face: helvetica, arial; color: black; margin: 0; }
 .date { font-size: 10px; font-weight: normal }
 .visits { color: #5Af; font-weight: normal }
@@ -57,7 +55,7 @@ function loop() {
   if(flagemails==0)
   {
     flagemails=1;
-    client.getJSON('/activities', {'filter':efilter, 'limit': 100}, function(stream) {
+    client.getJSON('/activities', {'filter':efilter, 'limit': 500}, function(stream) {
       flagemails=2;
       var activities = stream.data.items;
       var count = activities.length;
@@ -83,7 +81,7 @@ function loop() {
   if(flagcommits==0)
   {
     flagcommits=1;
-    client.getJSON('/activities', {'filter':cfilter, 'limit': 100}, function(stream) {
+    client.getJSON('/activities', {'filter':cfilter, 'limit': 500}, function(stream) {
       flagcommits=2;
       var activities = stream.data.items;
       var count = activities.length;
@@ -121,12 +119,11 @@ function loop() {
 }
 
 
-$(function(){
 $(function() {
     // let's loop to build tooltips and x labels.
     var thelabels = new Array(30);
     for (var i = 0; i < thelabels.length; i++) {
-        thelabels[i] = (i % 6 === 0) ? (i + 1) + " " : "";
+        thelabels[i] = (i % 6 === 0) ? (i + 1) + " september" : "";
     }
 
     // build the chart with no data but only x axis labels using the "google analytics" template.
@@ -139,8 +136,6 @@ $(function() {
     loop();
 });
 
-
-
 // this is a reausable template definition.
 $.elycharts.templates['google_analytics'] = {
     type: "line",
@@ -148,7 +143,7 @@ $.elycharts.templates['google_analytics'] = {
     /* Define how to draw tooltips starting from series data */
     /* this can be an array with the tooltips content or a function to generate them on the fly */
     tooltips: function(env, serie, index, value, label) {
-        return "<div class='label'><p class='date'>" + index + "</p><p><span class='visits'>Visits:</span> " + env.opt.values['serie1'][index] + "</p><p><span class='hits'>Hits:</span> " + env.opt.values['serie2'][index] + "</p></div>";
+        return "<div class='label'><p class='date'>Day " + index + "</p><p><span class='visits'>Emails:</span> " + env.opt.values['serie1'][index] + "</p><p><span class='hits'>Commits:</span> " + env.opt.values['serie2'][index] + "</p></div>";
     },
     defaultSeries: {
         plotProps: {
@@ -272,7 +267,6 @@ $.elycharts.templates['google_analytics'] = {
         }
     }
 }
-});//]]>  
 
 </script>
 
