@@ -123,7 +123,7 @@ $(function() {
     // let's loop to build tooltips and x labels.
     var thelabels = new Array(30);
     for (var i = 0; i < thelabels.length; i++) {
-        thelabels[i] = (i % 6 === 0) ? (i + 1) + " day" : "";
+        thelabels[i] = (i % 6 === 0) ? "day "+(i + 1) + " " : "";
     }
 
     // build the chart with no data but only x axis labels using the "google analytics" template.
