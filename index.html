@@ -68,10 +68,11 @@ function loop() {
         console.log('found ' + published + ' emails'+ published.getDate());
         return published.getDate(); 
       });
+      console.log('found ' + emails.length + ' emails length');
       for(var i = 0;i<emails.length;i++) {
         emails[i] = emails[i].length;
       }
-      console.log('found ' + emails.length + ' emails');
+      console.log('found ' + emails.length + ' emails length');
     });
   }
   if(flagcommits==0)
