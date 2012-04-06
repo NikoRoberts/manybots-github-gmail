@@ -63,14 +63,14 @@ function loop() {
       
       console.log('found ' + count + ' emails');
       
-      emails = _.groupBy(activities, function(item) { 
+      var temails = _.groupBy(activities, function(item) { 
         var published = new Date((item.published).replace(/-/g,"/").replace(/[TZ]/g," "));
         console.log('found ' + published + ' emails'+ published.getDate());
         return published.getDate(); 
       });
-      console.log('found ' + emails.length );
-      for(var i = 0;i<emails.length;i++) {
-        emails[i] = emails[i].length;
+      console.log('found ' + temails.length );
+      for(var i = 0;i<temails.length;i++) {
+        emails[i] = temails[i].length;
       }
       console.log('found ' + emails.length );
     });
@@ -85,12 +85,12 @@ function loop() {
       
       console.log('found ' + count + ' activities');
       
-      commits = _.groupBy(activities, function(item) { 
+     var tcommits = _.groupBy(activities, function(item) { 
         var published = new Date((item.published).replace(/-/g,"/").replace(/[TZ]/g," "));
         return published.getDate(); 
       });
-      for(var i = 0;i<commits.length;i++) {
-        commits[i] = commits[i].length;
+      for(var i = 0;i<tcommits.length;i++) {
+        commits[i] = tcommits[i].length;
       }
       
     });
@@ -115,7 +115,7 @@ $(function() {
     // let's loop to build tooltips and x labels.
     var thelabels = new Array(30);
     for (var i = 0; i < thelabels.length; i++) {
-        thelabels[i] = (i % 6 === 0) ? (i + 1) + " march" : "";
+        thelabels[i] = (i % 6 === 0) ? (i + 1) + " " : "";
     }
 
     // build the chart with no data but only x axis labels using the "google analytics" template.
@@ -137,7 +137,7 @@ $.elycharts.templates['google_analytics'] = {
     /* Define how to draw tooltips starting from series data */
     /* this can be an array with the tooltips content or a function to generate them on the fly */
     tooltips: function(env, serie, index, value, label) {
-        return "<div class='label'><p class='date'>March " + index + "</p><p><span class='visits'>Visits:</span> " + env.opt.values['serie1'][index] + "</p><p><span class='hits'>Hits:</span> " + env.opt.values['serie2'][index] + "</p></div>";
+        return "<div class='label'><p class='date'>" + index + "</p><p><span class='visits'>Visits:</span> " + env.opt.values['serie1'][index] + "</p><p><span class='hits'>Hits:</span> " + env.opt.values['serie2'][index] + "</p></div>";
     },
     defaultSeries: {
         plotProps: {
