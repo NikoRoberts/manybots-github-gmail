@@ -56,15 +56,16 @@ function loop() {
   if(flagemails==0)
   {
     flagemails=1;
-    client.getJSON('/activities', {'filter':efilter, 'limit': 500}, function(stream) {
+    client.getJSON('/activities', {'filter':efilter, 'limit': 100}, function(stream) {
       flagemails=2;
       var activities = stream.data.items;
       var count = activities.length;
       
-      console.log('found ' + count + ' activities');
+      console.log('found ' + count + ' emails');
       
       emails = _.groupBy(activities, function(item) { 
         var published = new Date((item.published).replace(/-/g,"/").replace(/[TZ]/g," "));
+        console.log('found ' + published + ' emails'+ published.getDate());
         return published.getDate(); 
       });
       
@@ -73,7 +74,7 @@ function loop() {
   if(flagcommits==0)
   {
     flagcommits=1;
-    client.getJSON('/activities', {'filter':cfilter, 'limit': 500}, function(stream) {
+    client.getJSON('/activities', {'filter':cfilter, 'limit': 100}, function(stream) {
       flagcommits=2;
       var activities = stream.data.items;
       var count = activities.length;
