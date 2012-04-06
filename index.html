@@ -68,6 +68,9 @@ function loop() {
         console.log('found ' + published + ' emails'+ published.getDate());
         return published.getDate(); 
       });
+      for(var i = 0;i<emails.length;i++) {
+        emails[i] = emails[i].length;
+      }
       console.log('found ' + emails.toString() + ' emails');
     });
   }
@@ -85,6 +88,9 @@ function loop() {
         var published = new Date((item.published).replace(/-/g,"/").replace(/[TZ]/g," "));
         return published.getDate(); 
       });
+      for(var i = 0;i<commits.length;i++) {
+        commits[i] = commits[i].length;
+      }
       
     });
   }
